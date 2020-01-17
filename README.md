@@ -4,8 +4,8 @@ Create locale dart files from json
 
 ## Usage
 
-flutter pub run localizator -from ".json files directory" -to "out dart directory"
+flutter pub run localizator generate -from ".json files directory" -to "out dart directory"
 
 ## Example
 
-flutter pub run localizator -from res/string -to lib/string
+flutter pub run localizator generate -from res/string -to lib/string
