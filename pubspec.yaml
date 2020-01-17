@@ -1,0 +1,15 @@
+name: localizator
+description: generate dart locale files from json.
+version: 0.1.0
+homepage: https://gitlab.com/NyAkovlev/localizator
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  dart_style:
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
