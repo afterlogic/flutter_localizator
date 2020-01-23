@@ -1,22 +1,21 @@
 library localizator;
 
 import 'package:localizator/localizator.dart';
-import 'package:localizator/new_locale.dart';
+import 'package:localizator/update_locale.dart';
 
 main(List<String> args) async {
   final iterator = args.iterator;
   if (iterator.moveNext()) {
     if (iterator.current == "generate" || iterator.current == "g") {
       return _generate(iterator);
-    } else if (iterator.current == "new_locale" || iterator.current == "n") {
-      return _newLocale(iterator);
+    } else if (iterator.current == "update_locale" || iterator.current == "u") {
+      return _updateLocale(iterator);
     }
   }
+  print("you can call:");
   print(
-      "you can call \"localizator generate\" for generate dart locale file from json files");
-
-  print("or \"localizator new_locale\" for create new json file with keys");
-
+      "\"localizator generate\" for generate dart locale file from json files");
+  print("");
   print("use \"localizator {function} -help\" for get function arguments");
 }
 
@@ -59,25 +58,24 @@ _generate(Iterator iterator) async {
   );
 }
 
-_newLocale(Iterator iterator) async {
-  _NewLocaleArg arg;
+_updateLocale(Iterator iterator) async {
+  _UpdateLocaleArg arg;
   String from;
   String baseLocale;
   while (iterator.moveNext() == true) {
     final current = iterator.current;
     if (current == "-from" || current == "-f") {
-      arg = _NewLocaleArg.from;
+      arg = _UpdateLocaleArg.from;
     } else if (current == "-baseLocale" || current == "-b") {
-      arg = _NewLocaleArg.baseLocale;
+      arg = _UpdateLocaleArg.baseLocale;
     } else if (current == "-help" || current == "-h") {
-      print("   -from | -f            json folder or file path\n");
-      print("   -to | -t              out dart path\n");
-      print("   -baseLocale | -b      locale for generate S class\n");
+      print("   -from | -f            json folder\n");
+      print("   -baseLocale | -b      locale for get keys\n");
       return;
     } else {
-      if (arg == _NewLocaleArg.from) {
+      if (arg == _UpdateLocaleArg.from) {
         from = current;
-      } else if (arg == _NewLocaleArg.baseLocale) {
+      } else if (arg == _UpdateLocaleArg.baseLocale) {
         baseLocale = current;
       }
       arg = null;
@@ -85,7 +83,7 @@ _newLocale(Iterator iterator) async {
   }
   assert(from != null);
 
-  await newLocale(
+  await updateLocale(
     from,
     baseLocale,
   );
@@ -93,4 +91,6 @@ _newLocale(Iterator iterator) async {
 
 enum _GenArg { from, to, baseLocale, help }
 
-enum _NewLocaleArg { from, baseLocale, help }
+enum _UpdateLocaleArg { from, baseLocale, help }
+
+enum _NewLocaleArg { code, from, baseLocale, help }

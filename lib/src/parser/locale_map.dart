@@ -3,17 +3,17 @@ import 'package:localizator/src/localizator/localization_filed.dart';
 class LocaleMap {
   final String localeCode;
   final List<LocalizationField> field;
-  final bool useSuffix;
+  final bool _useSuffix;
 
-  LocaleMap(this.localeCode, this.field, [this.useSuffix = true]);
+  LocaleMap(this.localeCode, this.field, [this._useSuffix = true]);
 
-  String get fileName => localeCode + (useSuffix ? "_" + suffix : "");
+  String get fileName => localeCode + (_useSuffix ? "_" + _suffix : "");
 
   String get className => localeCode.isEmpty
       ? localeCode
       : localeCode[0].toUpperCase() +
           localeCode.substring(1) +
-          (useSuffix ? _firstCharToUpperCase(suffix) : "");
+          (_useSuffix ? _firstCharToUpperCase(_suffix) : "");
 
   static _firstCharToUpperCase(String text) {
     return text[0].toUpperCase() + text.substring(1);
@@ -23,5 +23,5 @@ class LocaleMap {
     return LocaleMap(prefix, field, false);
   }
 
-  static const suffix = "string";
+  static const _suffix = "string";
 }

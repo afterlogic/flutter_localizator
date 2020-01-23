@@ -1,6 +1,8 @@
 import 'dart:io';
+
 import 'package:localizator/src/parser/json_file_parser.dart';
 import 'package:localizator/src/parser/locale_map.dart';
+import 'package:localizator/src/util/file_util.dart';
 
 import 'localizator/localization_maker.dart';
 
@@ -19,10 +21,6 @@ class Localization {
     this.baseLocaleCode,
   )   : outPath = preparePath(outPath),
         jsonPath = preparePath(jsonPath);
-
-  static String preparePath(String path) {
-    return path.replaceAll(RegExp("\/|\\\\"), Platform.pathSeparator);
-  }
 
   Future<List<LocaleMap>> _getInputJson() async {
     final path = directory.path + Platform.pathSeparator + jsonPath;

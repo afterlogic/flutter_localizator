@@ -14,7 +14,10 @@ class LocalizationMaker {
     final isSuper = baseLocaleMap == localeMap;
 
     var outText = "";
-    outText += "import 'dart:ui';";
+    outText += "import 'dart:ui';\n\n";
+    outText += "//// ignore_for_file: non_constant_identifier_names\n";
+    outText += "//// ignore_for_file: camel_case_types\n";
+    outText += "//// ignore_for_file: prefer_single_quotes\n\n";
     if (!isSuper) {
       outText += "import '${baseLocaleMap.fileName}.dart';";
       outText +=
@@ -45,7 +48,7 @@ class LocalizationMaker {
     final isFunction = field.environment.isNotEmpty;
 
     final fieldName =
-        isFunction ? "${field.name}(String $textEnvironment)":field.name ;
+        isFunction ? "${field.name}(String $textEnvironment)" : field.name;
 
     final fieldWithType = isFunction
         ? "String $fieldName"

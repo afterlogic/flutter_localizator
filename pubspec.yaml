@@ -1,6 +1,6 @@
 name: localizator
 description: generate dart locale files from json.
-version: 0.1.0
+version: 0.1.0+2
 homepage: https://gitlab.com/NyAkovlev/localizator
 
 environment:

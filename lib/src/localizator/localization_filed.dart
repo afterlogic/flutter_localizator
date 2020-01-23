@@ -9,6 +9,7 @@ class LocalizationField {
 
   factory LocalizationField.fromMapEntry(String key, String value) {
     var textValue = "";
+    var name =key.replaceAll(" ", "_");
     if (value is String) {
       textValue = value;
     } else {
@@ -27,7 +28,10 @@ class LocalizationField {
         environment.add(value.substring(1));
       }
     });
-    return LocalizationField(key, textValue, environment);
+    textValue = textValue.replaceAll("\\\\\$", "\\\$");
+    textValue = textValue.replaceAll("\r", "\\r");
+    textValue = textValue.replaceAll("\n", "\\n");
+    return LocalizationField(name, textValue, environment);
   }
 
   static List<LocalizationField> fromMap(Map<String, dynamic> map) {
