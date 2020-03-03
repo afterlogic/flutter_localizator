@@ -1,6 +1,5 @@
 {
-  "key": "value",
-  "function": "text $dynamic",
-  "usage_$": "text \\$text_again",
-  "multiLine": "text\ntext"
+  "test": "test",
+  "text": "text",
+  "text_with_params": "text %s"
 }
