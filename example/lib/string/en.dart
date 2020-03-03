@@ -6,11 +6,13 @@ import 'package:flutter/services.dart';
 class EnS extends S {
   final _path = "res/en.json";
   final Locale locale = Locale("en");
-
-  Future load() async {
-    map = jsonDecode(await rootBundle.loadString(_path));
-  }
-
   @override
-  Map<String, String> map;
+  final Map<String, String> map;
+
+  EnS._(this.map);
+
+  Future<EnS> load() async {
+    final map = jsonDecode(await rootBundle.loadString(_path));
+    return EnS._(map);
+  }
 }

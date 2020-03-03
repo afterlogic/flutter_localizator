@@ -38,13 +38,15 @@ class LocaleContent {
       class ${localeCode.firstToUpper}S extends S {
       final _path="$path";
       final Locale locale = Locale(\"$localeCode\");
-      
-      Future load() async {
-        map = jsonDecode(await rootBundle.loadString(_path));
-      }
-      
       @override
-      Map<String, String> map;
+      final Map<String, String> map;
+      
+      ${localeCode.firstToUpper}S._(this.map);
+        
+      Future<${localeCode.firstToUpper}S> load() async {
+        final map = jsonDecode(await rootBundle.loadString(_path));
+        return ${localeCode.firstToUpper}S._(map);
+      }
       }
       """;
 }
