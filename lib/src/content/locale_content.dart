@@ -1,52 +1,37 @@
-import 'package:dart_style/dart_style.dart';
-import 'package:localizator/src/config.dart';
-import 'package:localizator/src/locale/locale_map.dart';
+import 'dart:convert';
+
+import 'package:localizator/src/model/locale_map.dart';
 import 'package:localizator/src/util/case_util.dart';
 
 class LocaleContent {
   final LocaleMap localeMap;
-  final Config config;
+  final Map<String, int> keysWithId;
 
-  LocaleContent(
-    this.localeMap,
-    this.config,
-  );
+  LocaleContent(this.keysWithId, this.localeMap);
 
-  String build() {
-    final path = "${config.inputPath}/${localeMap.fileName}";
+  String _classContent(String content) => """
+  import "s.dart";
+  
+class ${localeMap.locale.firstToUpper}S extends S{
+final _map=<int,String>{
+$content
+};
+String get(int id)=>_map[id];
+}
+""";
 
-    final out = _imports() + _classContent(localeMap.locale, path);
-    return DartFormatter().format(out);
+  String _prepareValue(String value) => _removeList(jsonEncode([value]));
+
+  String _removeList(String string) => string.substring(1, string.length - 1);
+
+  String _entityContent(int id, String value) =>
+      "$id : ${_prepareValue(value)},";
+
+  String content() {
+    return _classContent(
+      localeMap.map.entries
+          .map((entity) => _entityContent(keysWithId[entity.key], entity.value))
+          .join("\n"),
+    );
   }
-
-  String toCode(dynamic value) {
-    final code = value.toString();
-    if (value is String) {
-      return "\"$code\"";
-    }
-    return code;
-  }
-
-  String _imports() => """
-  import 'dart:convert';
-  import 's.dart';  
-  import 'dart:ui';
-  import 'package:flutter/services.dart';
-      """;
-
-  String _classContent(String localeCode, String path) => """ 
-      class ${localeCode.firstToUpper}S extends S {
-      final _path="$path";
-      final Locale locale = Locale(\"$localeCode\");
-      @override
-      final Map<String, String> map;
-      
-      ${localeCode.firstToUpper}S._(this.map);
-        
-      Future<${localeCode.firstToUpper}S> load() async {
-        final map = jsonDecode(await rootBundle.loadString(_path));
-        return ${localeCode.firstToUpper}S._(map);
-      }
-      }
-      """;
 }

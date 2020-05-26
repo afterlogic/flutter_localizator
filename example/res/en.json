@@ -1,5 +1,6 @@
 {
   "test": "test",
   "text": "text",
-  "text_with_params": "text %s"
+  "text_with_params": "text %s\n\""
+
 }
