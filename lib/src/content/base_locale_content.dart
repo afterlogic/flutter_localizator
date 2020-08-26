@@ -1,5 +1,3 @@
-import 'package:recase/recase.dart';
-
 class BaseLocaleContent {
   final Map<String, int> keysWithId;
 
@@ -17,7 +15,7 @@ String get(int id);
   String content() {
     return _classContent(
       keysWithId.entries
-          .map((entity) => _fieldContent(entity.key.camelCase, entity.value))
+          .map((entity) => _fieldContent(entity.key, entity.value))
           .join("\n"),
     );
   }
