@@ -1,3 +1,7 @@
+## [0.4.0] - 02.10.2020
+
+* added abstract interface for generated class from localizator_interface package 
+
 ## [0.3.0] - 26.05.2020
 
 * remove transform parameter name to camelCase 

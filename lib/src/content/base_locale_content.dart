@@ -4,7 +4,9 @@ class BaseLocaleContent {
   BaseLocaleContent(this.keysWithId);
 
   String _classContent(String content) => """
-abstract class S {
+import 'package:localizator_interface/localizator_interface.dart';
+
+abstract class S extends SInterface{
 $content
 String get(int id);
 }
