@@ -20,17 +20,17 @@ String get(int id)=>_map[id];
 }
 """;
 
-  String _prepareValue(String value) => _removeList(jsonEncode([value]));
+  String _prepareValue(String value) => _removeList(jsonEncode(value));
 
   String _removeList(String string) => string.substring(1, string.length - 1);
 
-  String _entityContent(int id, String value) =>
+  String _entityContent(String id, String value) =>
       "$id : ${_prepareValue(value)},";
 
   String content() {
     return _classContent(
       localeMap.map.entries
-          .map((entity) => _entityContent(keysWithId[entity.key], entity.value))
+          .map((entity) => _entityContent("S.${entity.key}", entity.value))
           .join("\n"),
     );
   }

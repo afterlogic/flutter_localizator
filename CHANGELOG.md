@@ -1,3 +1,7 @@
+## [0.4.1] - 20.01.2021
+
+* change string codes to string constants
+
 ## [0.4.0] - 02.10.2020
 
 * added abstract interface for generated class from localizator_interface package 
