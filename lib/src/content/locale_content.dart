@@ -25,7 +25,7 @@ String get(int id)=>_map[id];
   String _removeList(String string) => string.substring(1, string.length - 1);
 
   String _entityContent(String id, String value) =>
-      "$id : ${_prepareValue(value)},";
+      "$id : \"${_prepareValue(value)}\",";
 
   String content() {
     return _classContent(
