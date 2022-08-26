@@ -35,8 +35,10 @@ class LocalizatorGenerator {
   Future<Iterable<LocaleMap>> _fileToMap(List<File> files) async {
     return files.map(
       (file) {
-        return LocaleMap(jsonDecode(file.readAsStringSync()),
-            RegExp(config.fileMask).firstMatch(getFileName(file)).group(1));
+        return LocaleMap(
+          jsonDecode(file.readAsStringSync()),
+          RegExp(config.fileMask).firstMatch(getFileName(file))?.group(1) ?? '',
+        );
       },
     );
   }

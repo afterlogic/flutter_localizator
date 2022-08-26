@@ -11,13 +11,22 @@ main(List<String> args) async {
     final current = iterator.current;
     switch (current) {
       case "-from":
-        config.inputPath = next();
+        final arg = next();
+        if (arg != null) {
+          config.inputPath = arg;
+        }
         break;
       case "-to":
-        config.outputPath = next();
+        final arg = next();
+        if (arg != null) {
+          config.outputPath = arg;
+        }
         break;
       case "-mask":
-        config.fileMask = next();
+        final arg = next();
+        if (arg != null) {
+          config.fileMask = arg;
+        }
         break;
     }
   }
